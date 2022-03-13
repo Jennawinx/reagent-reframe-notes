@@ -8,7 +8,7 @@
         item         (get-in routing-data [:route-params :item-id])]
     [:span.main
      [:h1 (str "Item " item " of reagent-reframe-notes")]
-     [:p [:a {:href (routes/path-for :items)} "Back to the list of items"]]]))
+     [:p [:a {:href (routes/path-for :routes/items)} "Back to the list of items"]]]))
 
 ;; NOTE: Keep entry point as the bottom most function
 (defn notes-page []
@@ -19,5 +19,5 @@
      (for [item-id (range 1 60)]
        ^{:key (str "item-" item-id)}
        [:li {:name (str "item-" item-id)}
-        [:a {:href (routes/path-for :item {:item-id item-id})}
+        [:a {:href (routes/path-for :routes/item {:item-id item-id})}
          (str "Item: " item-id)]])]]])

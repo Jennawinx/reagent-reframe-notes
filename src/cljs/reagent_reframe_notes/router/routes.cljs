@@ -4,11 +4,11 @@
 
 (def router
   (reitit/router
-   [["/" :index]
+   [["/" :routes/index]
     ["/items"
-     ["/" :items]
-     ["/:item-id" :item]]
-    ["/about" :about]])) 
+     ["/" :routes/items]
+     ["/:item-id" :routes/item]]
+    ["/about" :routes/about]])) 
 
 (defn path-for [route-name & [params]]
   (if params

@@ -8,9 +8,9 @@
 ;; Views are placed here to avoid circular dependencies
 
 (def views 
-  {:index #'home/home-page
-   :items #'notes/notes-page
-   :item  #'notes/item-page})
+  {:routes/index #'home/home-page
+   :routes/items #'notes/notes-page
+   :routes/item  #'notes/item-page})
 
 (defn view-for [route-name]
   (get views route-name))
