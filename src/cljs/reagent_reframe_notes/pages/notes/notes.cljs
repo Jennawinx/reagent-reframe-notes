@@ -14,7 +14,7 @@
 (defn notes-page []
   [:div "Booklet of notes"
    [:span.main
-    [:h1 "The items of reagent-reframe-notes"]
+    [:h1 "Routing test"]
     [:ul
      (for [item-id (range 1 60)]
        ^{:key (str "item-" item-id)}

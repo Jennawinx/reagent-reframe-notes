@@ -4,10 +4,9 @@
 
 ;; NOTE: Keep entry point as the bottom most function
 (defn home-page []
-  (fn []
-    [:div
-     [:span "Welcome to the experiment!"]
-     [:span.main
-      [:h1 "Welcome to reagent-reframe-notes"]
-      [:ul [:li [:a {:href (routes/path-for :routes/items)}
-                    "Items of reagent-reframe-notes"]]]]]))
+  [:div
+   [:span "Welcome to the experiment!"]
+   [:span.main
+    [:h1 "Welcome to reagent-reframe-notes"]
+    [:ul [:li [:a {:href (routes/path-for :routes/notes)}
+               "Items of reagent-reframe-notes"]]]]])

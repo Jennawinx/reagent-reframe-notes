@@ -9,76 +9,12 @@
    [reagent-reframe-notes.router.routes :as routes]
    [reagent-reframe-notes.router.views :as views]))
 
-;; -------------------------
-;; Routes
-
-;; (def router
-;;   (reitit/router
-;;    [["/" :index]
-;;     ["/items"
-;;      ["" {:name :items
-;;           :view [:h1 "hi"]}]
-;;      ["/:item-id" :item]]
-;;     ["/about" :about]]))
-
-;; (defn path-for [route & [params]]
-;;   (if params
-;;     (:path (reitit/match-by-name router route params))
-;;     (:path (reitit/match-by-name router route))))
-
-;; -------------------------
-;; Page components
-
-;; (defn home-page []
-;;   (fn []
-;;     [:span.main
-;;      [:h1 "Welcome to reagent-reframe-notes"]
-;;      [:ul
-;;       [:li [:a {:href (path-for :items)} "Items of reagent-reframe-notes"]]]]))
-
-
-;; (defn items-page []
-;;   (fn []
-;;     [:span.main
-;;      [:h1 "The items of reagent-reframe-notes"]
-;;      [:ul (map (fn [item-id]
-;;                  [:li {:name (str "item-" item-id) :key (str "item-" item-id)}
-;;                   [:a {:href (path-for :item {:item-id item-id})} "Item: " item-id]])
-;;                (range 1 60))]]))
-
-
-;; (defn item-page []
-;;   (fn []
-;;     (let [routing-data (session/get :route)
-;;           item (get-in routing-data [:route-params :item-id])]
-;;       [:span.main
-;;        [:h1 (str "Item " item " of reagent-reframe-notes")]
-;;        [:p [:a {:href (path-for :items)} "Back to the list of items"]]])))
-
-
-;; (defn about-page []
-;;   (fn [] [:span.main
-;;           [:h1 "About reagent-reframe-notes"]]))
-
-
-;; -------------------------
-;; Translate routes -> page components
-
-;; (defn page-for [route]
-;;   (case route
-;;     :index #'home-page
-;;     :about #'about-page
-;;     :items #'items-page
-;;     :item #'item-page))
-
-
-;; -------------------------
-;; Page mounting component
-
 (defn nav []
   [:header
-   #_[:p [:a {:href (path-for :index)} "Home"] " | "
-    [:a {:href (path-for :about)} "About reagent-reframe-notes"]]])
+   [:p 
+    [:a {:href (routes/path-for :routes/index)} "Home"] 
+    " | "
+    [:a {:href (routes/path-for :routes/rendering)} "Rendering"]]])
 
 (defn footer []
   [:footer
@@ -86,16 +22,11 @@
     [:a {:href "https://github.com/reagent-project/reagent-template"} "Reagent Template"] "."]])
 
 (defn app []
-  (fn []
-    [:div "Hi"]
-    (let [page (:current-page (session/get :route))]
-      [:div
-       [nav]
-       [page]
-       [footer]])))
-
-;; -------------------------
-;; Initialize app
+  (let [page (:current-page (session/get :route))]
+    [:div
+     [nav]
+     [page]
+     [footer]]))
 
 (defn mount-root []
   (rdom/render [app] (.getElementById js/document "app")))
